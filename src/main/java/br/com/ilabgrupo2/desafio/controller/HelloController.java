@@ -26,12 +26,15 @@ public class HelloController {
         System.out.println("filename: " + fileName);
          
         String message = "";
+        String variavel = "";
          
         try {
             S3Util.uploadFile(fileName, multipart.getInputStream());
-            message = "Your file has been uploaded successfully!";
+            message = "Upload realizado com sucesso!";
+            variavel = "umaclasse";
         } catch (Exception ex) {
-            message = "Error uploading file: " + ex.getMessage();
+            message = "Erro ao fazer upload: " + ex.getMessage();
+            variavel = "oier";
         }
          
         model.addAttribute("message", message);

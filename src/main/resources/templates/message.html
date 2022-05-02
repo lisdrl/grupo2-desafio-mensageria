@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Spring Boot File Upload to S3</title>
-</head>
-<body>
-    <div align="center">
-        <div><h3>[[${message}]]</h3></div>
-    </div>
-</body>
+
+    <head>
+        <meta charset="ISO-8859-1">
+        <link th:href="@{./style.css}" rel="stylesheet" />
+        <title>Spring Boot File Upload to S3</title>
+        <style type="text/css">
+            .successClass {
+                display: block;
+            }
+            .errorClass {
+                display: none;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div align="center">
+            <div>
+                <h3>[[${message}]]</h3>
+            </div>
+            <div class=[[${variavel}]]>Osadsaier</div>
+        </div>
+    </body>
+
 </html>

@@ -32,16 +32,5 @@ public class S3Util {
 	        client.putObject(request,
 	                RequestBody.fromInputStream(inputStream, inputStream.available()));
 	        
-//	        S3Waiter waiter = client.waiter();
-//	        HeadObjectRequest waitRequest = HeadObjectRequest.builder()
-//	                            .bucket(BUCKET)
-//	                            .key(fileName)
-//	                            .build();
-//	         
-//	        WaiterResponse<HeadObjectResponse> waitResponse = waiter.waitUntilObjectExists(waitRequest);
-//	         
-//	        waitResponse.matched().response().ifPresent(x -> {
-//	            // run custom code that should be executed after the upload file exists
-//	        });
 	    }
 }
