@@ -1,7 +1,6 @@
 #!/bin/bash
-#export KAFKA_HOST="44.200.60.230:9092"
-export KAFKA_HOST="localhost:9092"
-export KAFKA_TOPIC="TOPICO_1"
+export KAFKA_HOST="44.200.60.230:9092"
+export KAFKA_TOPIC="PRODUTOS"
 
 export CLASSPATH=target/desafio-0.0.1-SNAPSHOT.jar
 export className=DesafioApplication
