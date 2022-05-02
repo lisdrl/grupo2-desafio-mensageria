@@ -2,7 +2,7 @@
 export KAFKA_HOST="44.200.60.230:9092"
 export KAFKA_TOPIC="TOPICO_1"
 
-export CLASSPATH=target/kafka_producer-1.0-SNAPSHOT.jar
+export CLASSPATH=target/desafio-0.0.1-SNAPSHOT.jar
 export className=DesafioApplication
 echo "## Running $className..."
 shift
