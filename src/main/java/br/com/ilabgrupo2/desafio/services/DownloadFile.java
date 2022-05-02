@@ -1,8 +1,8 @@
 package br.com.ilabgrupo2.desafio.services;
 
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import software.amazon.awssdk.auth.credentials.AwsCredentials;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
@@ -46,17 +46,19 @@ public class DownloadFile {
 			.build();
 
 	ResponseInputStream<GetObjectResponse> inputStream = client.getObject(request); 
-	//Não precisa criar novo arquivo e dar um nom, q é essa linha debaixo
-	BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(keyName));
 	
-	byte[] buffer = new byte[4096];
-	int bytesRead = -1; 
-	
-	while ((bytesRead = inputStream.read(buffer)) != -1) { 
-		outputStream.write(buffer, 0, bytesRead);
-	}
+	readFile(inputStream); 
 	
 	inputStream.close();
-	outputStream.close();
+	}
+	
+	
+	public static void readFile(ResponseInputStream<GetObjectResponse> file) throws IOException {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(file));
+		
+		String line;            
+		while ((line = reader.readLine()) != null) {            
+			System.out.println(line);
+		}		
 	}
 }
