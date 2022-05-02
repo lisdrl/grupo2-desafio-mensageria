@@ -34,6 +34,7 @@ public class HelloController {
             S3Util.uploadFile(fileName, multipart.getInputStream());
             message = "Your file has been uploaded successfully!";
 
+            System.out.println("Enviando mensagem ...");
             KafkaService.sendMessage("MENSAGEM - " + UUID.randomUUID().toString(), "1");
         } catch (Exception ex) {
             message = "Error uploading file: " + ex.getMessage();
