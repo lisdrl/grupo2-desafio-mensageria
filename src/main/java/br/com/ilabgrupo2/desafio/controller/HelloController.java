@@ -1,7 +1,5 @@
 package br.com.ilabgrupo2.desafio.controller;
 
-import java.util.UUID;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,8 +31,8 @@ public class HelloController {
         try {
             S3Util.uploadFile(fileName, multipart.getInputStream());
             message = "Your file has been uploaded successfully!";
-            System.out.println("Enviando mensagem ...");
-            KafkaService.sendMessage("JEAN-" + UUID.randomUUID().toString(), "8");
+            System.out.println("Enviando mensagem para servidor kafka...");
+            KafkaService.sendMessage("Tratar lista de produtos.", "8");
         } catch (Exception ex) {
             message = "Error uploading file: " + ex.getMessage();
         }
