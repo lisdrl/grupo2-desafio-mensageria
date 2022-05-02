@@ -3,6 +3,7 @@ package br.com.ilabgrupo2.desafio.utils;
 import java.io.IOException;
 import java.io.InputStream;
 
+import br.com.ilabgrupo2.desafio.auth.CredentialsProvider;
 import software.amazon.awssdk.awscore.exception.AwsServiceException;
 import software.amazon.awssdk.core.exception.SdkClientException;
 import software.amazon.awssdk.core.sync.RequestBody;
@@ -19,7 +20,9 @@ public class S3Util {
      
 	    public static void uploadFile(String fileName, InputStream inputStream)
 	            throws S3Exception, AwsServiceException, SdkClientException, IOException {
-	        S3Client client = S3Client.builder().build();
+	        S3Client client = S3Client.builder()
+	        		.credentialsProvider(CredentialsProvider.returnCredentials())
+	        		.build();
 	         
 	        PutObjectRequest request = PutObjectRequest.builder()
 	                            .bucket(BUCKET)
