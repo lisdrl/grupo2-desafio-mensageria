@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.com.ilabgrupo2.desafio.kafka_producer.KafkaService;
 import br.com.ilabgrupo2.desafio.utils.S3Util;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-
 @Controller
 public class HelloController {
 	@GetMapping("/")
@@ -22,14 +22,11 @@ public class HelloController {
         return "home";
     }
 	
-     
     @PostMapping("/upload")
     public String handleUploadForm(Model model, String description,
             @RequestParam("file") MultipartFile multipart) throws IOException {
         System.out.println(multipart);
         String fileName = multipart.getOriginalFilename();
-//        System.out.println("filename: " + fileName);
-//        System.out.println("description" + description);
         System.out.println(multipart);
 
         BufferedReader br;
@@ -54,13 +51,13 @@ public class HelloController {
         String message = "";
         String divClass = "";
         String readedCsv = result.toString();
-//        String readedCsvHeader = readedCsv.substring(0, readedCsv.lastIndexOf("data")+4);
-//        String readedCsvContent = readedCsv.substring(readedCsv.lastIndexOf("data")+5, readedCsv.length()-1);
-//        System.out.println(readedCsvHeader);
-//        System.out.println(readedCsvContent);
 
         try {
             S3Util.uploadFile(fileName, multipart.getInputStream());
+
+            System.out.println("Enviando mensagem para servidor kafka...");
+//            KafkaService.sendMessage("Tratar lista de produtos.", "8");
+
             message = "Upload realizado com sucesso!";
         } catch (Exception ex) {
             message = "Erro ao fazer upload: " + ex.getMessage();
@@ -68,14 +65,6 @@ public class HelloController {
          
         model.addAttribute("message", message);
         model.addAttribute("readedCsvHeader", teste);
-//        model.addAttribute("readedCsvContent", readedCsvContent);
-
-//        File f = new File();
-//        BufferedReader reader = new BufferedReader(multipart);
-//
-//        String line;
-//        Produto p = null;
-//        System.out.println(reader);
 
         return "message";
     }
