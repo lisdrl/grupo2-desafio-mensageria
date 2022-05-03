@@ -30,11 +30,14 @@ public class HelloController {
          
         try {
             S3Util.uploadFile(fileName, multipart.getInputStream());
-            message = "Your file has been uploaded successfully!";
+
             System.out.println("Enviando mensagem para servidor kafka...");
             KafkaService.sendMessage("Tratar lista de produtos.", "8");
+
+            message = "Upload realizado com sucesso!";
+
         } catch (Exception ex) {
-            message = "Error uploading file: " + ex.getMessage();
+            message = "Erro ao fazer upload: " + ex.getMessage();
         }
          
         model.addAttribute("message", message);

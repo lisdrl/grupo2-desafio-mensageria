@@ -1,12 +1,78 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Spring Boot File Upload to S3</title>
-</head>
-<body>
-    <div align="center">
-        <div><h3>[[${message}]]</h3></div>
-    </div>
-</body>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <meta charset="ISO-8859-1">
+        <title>Spring Boot File Upload to S3</title>
+        <style type="text/css">
+            body {
+                width: 100%;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .uploaded-data {
+                display: none;
+            }
+
+            .visible {
+                display: block;
+            }
+
+            .products-header {
+                font-weight: bold;
+                font-family: monospace;
+            }
+
+            .products-content {
+                font-family: monospace;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .uploaded-data {
+                width: 440px;
+                background-color: bisque;
+                padding: 8px;
+                border-radius: 5px;
+            }
+
+            .uploaded-data p:nth-child(2){
+                font-weight: bold;
+                text-transform:uppercase;
+            }
+
+            .uploaded-data p{
+                text-align: center;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <div align="center">
+            <div>
+                <h3 class="status">[[${message}]]</h3>
+            </div>
+            <div class="uploaded-data">
+            <p th:utext="${readedCsvHeader}"></p>
+            </div>
+            <button id="back-button">VOLTAR</button>
+        </div>
+<script>
+    let status = document.querySelector(".status").innerText;
+    let uploadedDataDiv = document.querySelector(".uploaded-data");
+    let backBtn = document.getElementById("back-button");
+    backBtn.addEventListener("click", () => window.location.replace("http://44.200.60.230:8080"))
+
+    if (status.includes("sucesso")){
+        uploadedDataDiv.classList.add("visible");
+    }
+
+</script>
+    </body>
+
 </html>
