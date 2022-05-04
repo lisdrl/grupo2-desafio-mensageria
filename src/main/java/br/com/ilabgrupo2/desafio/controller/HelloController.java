@@ -34,21 +34,19 @@ public class HelloController {
         List<String> result = new ArrayList<>();
         String message = "";
         String teste = "";
-        
+
         try {
             String line;
             InputStream is = multipart.getInputStream();
             br = new BufferedReader(new InputStreamReader(is));
-            
+
             while ((line = br.readLine()) != null) {
                 String entryLine = "<p>" + line + "</p>";
                 result.add(entryLine);
             }
-            
+
             teste = result.toString().substring(1, result.toString().length()-1).replace(",", "").replace(";",  " | ");
-            
-            
-            
+
             S3Util.uploadFile(fileName, multipart.getInputStream());
 
             System.out.println("Enviando mensagem para servidor kafka...");
@@ -60,7 +58,7 @@ public class HelloController {
             System.err.println(ex.getMessage());
             message = "Erro ao fazer upload: " + ex.getMessage();
         }       
-         
+
         model.addAttribute("message", message);
         model.addAttribute("readedCsvHeader", teste);
 
