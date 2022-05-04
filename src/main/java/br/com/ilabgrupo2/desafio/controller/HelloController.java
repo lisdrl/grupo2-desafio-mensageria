@@ -29,7 +29,7 @@ public class HelloController {
             @RequestParam("file") MultipartFile multipart) throws IOException, InterruptedException, ExecutionException {
 
         String fileName = multipart.getOriginalFilename();
-
+                
         BufferedReader br;
         List<String> result = new ArrayList<>();
         String message = "";
@@ -50,7 +50,7 @@ public class HelloController {
             S3Util.uploadFile(fileName, multipart.getInputStream());
 
             System.out.println("Enviando mensagem para servidor kafka...");
-            KafkaService.sendMessage("Tratar lista de produtos.", "8");
+            KafkaService.sendMessage("Nova lista de produtos: ", fileName);
 
             message = "Upload realizado com sucesso!";
 

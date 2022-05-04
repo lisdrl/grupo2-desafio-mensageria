@@ -66,7 +66,8 @@
     let status = document.querySelector(".status").innerText;
     let uploadedDataDiv = document.querySelector(".uploaded-data");
     let backBtn = document.getElementById("back-button");
-    backBtn.addEventListener("click", () => window.location.replace("grupo2.tk:8080"))
+    
+    backBtn.addEventListener("click", () => window.location.replace("http://grupo2.tk:8080"))
 
     if (status.includes("sucesso")){
         uploadedDataDiv.classList.add("visible");
