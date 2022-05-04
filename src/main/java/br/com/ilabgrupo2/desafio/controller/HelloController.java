@@ -47,8 +47,6 @@ public class HelloController {
             
             teste = result.toString().substring(1, result.toString().length()-1).replace(",", "").replace(";",  " | ");
             
-            
-            
             S3Util.uploadFile(fileName, multipart.getInputStream());
 
             System.out.println("Enviando mensagem para servidor kafka...");
