@@ -20,10 +20,11 @@ public class S3Util {
 	        		.credentialsProvider(CredentialsProvider.returnCredentials())
 	        		.build();
 	         
-	        PutObjectRequest request = PutObjectRequest.builder()
-	                            .bucket(BUCKET)
-	                            .key(fileName)
-	                            .build();
+	        PutObjectRequest request = PutObjectRequest
+	        		.builder()
+              .bucket(BUCKET)
+              .key(fileName)
+              .build();
 	         
 	        client.putObject(request, RequestBody.fromInputStream(inputStream, inputStream.available()));
 	        

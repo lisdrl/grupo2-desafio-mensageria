@@ -11,11 +11,13 @@ public class CredentialsProvider {
                 return new AwsCredentials() {
                     @Override
                     public String accessKeyId() {
+                    	System.out.println(System.getenv("AWS_ACCESS_KEY"));
                         return System.getenv("AWS_ACCESS_KEY");
                     }
 
                     @Override
                     public String secretAccessKey() {
+                    	System.out.println(System.getenv("AWS_SECRET_KEY"));
                         return System.getenv("AWS_SECRET_KEY");
                     }
                 };
