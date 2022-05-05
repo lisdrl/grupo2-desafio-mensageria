@@ -3,13 +3,12 @@ package br.com.ilabgrupo2.desafio.kafka_producer;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
-import com.fasterxml.jackson.databind.ser.std.StringSerializer;
-
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.serialization.StringSerializer;
 
 public class KafkaService {
     public static void sendMessage(String key, String value) throws InterruptedException, ExecutionException{

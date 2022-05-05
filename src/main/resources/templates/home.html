@@ -14,10 +14,15 @@
                 </p>
                  
                 <p>
-                    <button type="submit">Submit</button>
+                    <button id="submit" type="submit">Submit</button>
+
                 </p>
             </form>
         </div>
     </div>
+<script>
+    let submitBtn = document.getElementById("submit");
+    submitBtn.addEventListener("click", () => console.log("clicou"));
+</script>
 </body>
 </html>
