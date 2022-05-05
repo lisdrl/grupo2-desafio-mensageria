@@ -1,5 +1,13 @@
 package br.com.ilabgrupo2.desafio.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,26 +27,41 @@ public class HelloController {
 
     @PostMapping("/upload")
     public String handleUploadForm(Model model, String description,
-            @RequestParam("file") MultipartFile multipart) {
+        @RequestParam("file") MultipartFile multipart) throws IOException, InterruptedException, ExecutionException {
         String fileName = multipart.getOriginalFilename();
 
-        System.out.println("Description: " + description);
-        System.out.println("filename: " + fileName);
-
+        BufferedReader br;
+        List<String> result = new ArrayList<>();
         String message = "";
+        String teste = "";
 
         try {
+            String line;
+            InputStream is = multipart.getInputStream();
+            br = new BufferedReader(new InputStreamReader(is));
+
+            while ((line = br.readLine()) != null) {
+                String entryLine = "<p>" + line + "</p>";
+                result.add(entryLine);
+            }
+
+            teste = result.toString().substring(1, result.toString().length()-1).replace(",", "").replace(";",  " | ");
+
             S3Util.uploadFile(fileName, multipart.getInputStream());
-            message = "Your file has been uploaded successfully!";
 
             System.out.println("Enviando mensagem para servidor kafka...");
 
-            KafkaService.sendMessage("Tratar lista de produtos.", "8");
-        } catch (Exception ex) {
-            message = "Error uploading file: " + ex.getMessage();
-        }
+            KafkaService.sendMessage("Nova lista de produtos: ", fileName);
+
+            message = "Upload realizado com sucesso!";
+
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+            message = "Erro ao fazer upload: " + ex.getMessage();
+        }       
 
         model.addAttribute("message", message);
+        model.addAttribute("readedCsvHeader", teste);
 
         return "message";
     }
