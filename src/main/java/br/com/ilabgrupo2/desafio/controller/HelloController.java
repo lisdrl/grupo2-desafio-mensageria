@@ -17,19 +17,28 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.com.ilabgrupo2.desafio.kafka_producer.KafkaService;
 import br.com.ilabgrupo2.desafio.utils.S3Util;
-
 @Controller
 public class HelloController {
     @GetMapping("/")
     public String viewHomePage() {
         return "home";
     }
+<<<<<<< HEAD
 
     @PostMapping("/upload")
     public String handleUploadForm(Model model, String description,
         @RequestParam("file") MultipartFile multipart) throws IOException, InterruptedException, ExecutionException {
         String fileName = multipart.getOriginalFilename();
 
+=======
+	
+    @PostMapping("/upload")
+    public String handleUploadForm(Model model, String description,
+            @RequestParam("file") MultipartFile multipart) throws IOException, InterruptedException, ExecutionException {
+
+        String fileName = multipart.getOriginalFilename();
+                
+>>>>>>> 2810e74145563bd4783e6a9bd11eff72789838bc
         BufferedReader br;
         List<String> result = new ArrayList<>();
         String message = "";
@@ -50,7 +59,10 @@ public class HelloController {
             S3Util.uploadFile(fileName, multipart.getInputStream());
 
             System.out.println("Enviando mensagem para servidor kafka...");
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2810e74145563bd4783e6a9bd11eff72789838bc
             KafkaService.sendMessage("Nova lista de produtos: ", fileName);
 
             message = "Upload realizado com sucesso!";
