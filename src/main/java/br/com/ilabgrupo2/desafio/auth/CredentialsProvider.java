@@ -5,24 +5,22 @@ import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 
 public class CredentialsProvider {
 	public static AwsCredentialsProvider returnCredentials() {
-        AwsCredentialsProvider credentialsProvider = new AwsCredentialsProvider() {
-            @Override
-            public AwsCredentials resolveCredentials() {
-                return new AwsCredentials() {
-                    @Override
-                    public String accessKeyId() {
-                    	System.out.println(System.getenv("AWS_ACCESS_KEY"));
-                        return System.getenv("AWS_ACCESS_KEY");
-                    }
+    AwsCredentialsProvider credentialsProvider = new AwsCredentialsProvider() {
+      @Override
+      public AwsCredentials resolveCredentials() {
+        return new AwsCredentials() {
+          @Override
+          public String accessKeyId() {
+            return System.getenv("AWS_ACCESS_KEY");
+          }
 
-                    @Override
-                    public String secretAccessKey() {
-                    	System.out.println(System.getenv("AWS_SECRET_KEY"));
-                        return System.getenv("AWS_SECRET_KEY");
-                    }
-                };
-            };
+          @Override
+          public String secretAccessKey() {
+            return System.getenv("AWS_SECRET_KEY");
+          }
         };
-        return credentialsProvider;
+      };
     };
+    return credentialsProvider;
+  };
 }
