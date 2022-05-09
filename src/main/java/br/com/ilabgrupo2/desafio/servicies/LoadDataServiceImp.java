@@ -9,12 +9,13 @@ import br.com.ilabgrupo2.desafio.model.Produto;
 import br.com.ilabgrupo2.desafio.repository.LoadDataDAO;
 
 @Service
-public class LoadDataService {
+public class LoadDataServiceImp implements ILoadDataService {
 
 	@Autowired
 	private LoadDataDAO loadData;
-	
-	public List<Produto> findAllProducts () {
+
+	@Override
+	public List<Produto> findAllProducts() {
 		try {
 			return loadData.findAll();
 		} catch(Exception ex) {
