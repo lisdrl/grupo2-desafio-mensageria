@@ -15,56 +15,38 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.com.ilabgrupo2.desafio.kafka_producer.KafkaService;
 import br.com.ilabgrupo2.desafio.model.Produto;
-import br.com.ilabgrupo2.desafio.servicies.LoadDataService;
+import br.com.ilabgrupo2.desafio.servicies.IDisplayContent;
+import br.com.ilabgrupo2.desafio.servicies.LoadDataServiceImp;
 import br.com.ilabgrupo2.desafio.utils.S3Util;
 
 @Controller
 public class HelloController {
 	
 	@Autowired
-	private LoadDataService loadDataService;
-	
-	
+	private IDisplayContent displayContent;
+
     @GetMapping("/")
     public String viewHomePage() {
-        return "home";
+      return "home";
     }
-	
+
     @PostMapping("/upload")
     public String handleUploadForm(Model model, String description,
             @RequestParam("file") MultipartFile multipart) throws IOException, InterruptedException, ExecutionException {
 
         String fileName = multipart.getOriginalFilename();
 
-        List<String> result = new ArrayList<>();
         String message = "";
-        String entries = "";
         String stringEntries = "";
 
         try {
             S3Util.uploadFile(fileName, multipart.getInputStream());
-            
-            List<Produto> pList = loadDataService.findAllProducts();
-            entries = "<p>" + "Nome" + " | " + "descrição" + " | " + "qtd" + " | " + "preço" + "<p>";
-            result.add(entries);
-            
-            for (Produto p : pList) {
-            	String name = p.getNome();
-            	String desc = p.getDescricao();
-            	String qtd  = p.getDescricao();
-            	Double price = p.getPrice();
-            	
-            	entries = "<p>" + name + " | " + desc + " | " + qtd + " | " + price + "<p>";
-            	result.add(entries);
-            }
-            
-            stringEntries = result.toString().replace("[", "").replace("]", "").replace(",", "");
-
-            System.out.println("Enviando mensagem para servidor kafka...");
-
-            KafkaService.sendMessage("Nova lista de produtos: ", fileName);
+            stringEntries = displayContent.convertProductListToString();
 
             message = "Upload realizado com sucesso!";
+            
+            System.out.println("Enviando mensagem para servidor kafka...");
+            KafkaService.sendMessage("Nova lista de produtos: ", fileName);
 
         } catch (IOException ex) {
             System.err.println(ex.getMessage());

@@ -93,8 +93,8 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<!-- Build an executable JAR -->
+			<!-- <plugin>
+				Build an executable JAR
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>3.1.0</version>
@@ -102,12 +102,12 @@
 				  <archive>
 					<manifest>
 					  <addClasspath>true</addClasspath>
-					  <!-- here we specify that we want to use the main method within the App class -->
+					  here we specify that we want to use the main method within the App class
 					  <mainClass>br.com.desafio.ilabgrupo2.DesafioApplication</mainClass>
 					</manifest>
 				  </archive>
 				</configuration>
-			  </plugin>
+			  </plugin> -->
 			</plugins>
 
 			  <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
