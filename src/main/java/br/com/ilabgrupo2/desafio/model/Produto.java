@@ -28,7 +28,7 @@ public class Produto {
 	private String data;
 	
 	@Column(name = "price")
-	private Double price;
+	private Double preco;
 	
 	public Long getId() {
 		return id;
@@ -71,25 +71,24 @@ public class Produto {
 	}
 	
 	public Double getPrice() {
-		return price;
+		return preco;
 	}
 
-	public void setPrice(Double price) {
-		this.price = price;
+	public void setPrice(Double preco) {
+		this.preco = preco;
 	}
 
 	public Produto(String nome, String descricao, Integer quantidade) {
-		super();
 		this.nome = nome;
 		this.descricao = descricao;
 		this.quantidade = quantidade;
 	}
-	
+
 	public Produto() {}
 
 	@Override
 	public String toString() {
 		return "Produto [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", quantidade=" + quantidade
-				+ ", data=" + data + ", price=" + price + "]";
+				+ ", data=" + data + ", price=" + preco + "]";
 	}
 }
