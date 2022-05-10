@@ -4,7 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -29,6 +33,11 @@ public class Produto {
 	
 	@Column(name = "price")
 	private Double preco;
+
+	@ManyToOne
+	@JoinColumn(name = "order_id")
+	@JsonIgnoreProperties("listaProdutos")
+	private Pedidos idPedido;
 	
 	public Long getId() {
 		return id;
@@ -69,19 +78,31 @@ public class Produto {
 	public void setData(String data) {
 		this.data = data;
 	}
-	
-	public Double getPrice() {
+
+	public Double getPreco() {
 		return preco;
 	}
 
-	public void setPrice(Double preco) {
+	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
 
-	public Produto(String nome, String descricao, Integer quantidade) {
+	public Pedidos getIdPedido() {
+		return idPedido;
+	}
+
+	public void setIdPedido(Pedidos idPedido) {
+		this.idPedido = idPedido;
+	}
+
+
+	public Produto(String data, String nome, String descricao, Integer quantidade, Double preco) {
+		super();
+		this.data = data;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.quantidade = quantidade;
+		this.preco = preco;
 	}
 
 	public Produto() {}

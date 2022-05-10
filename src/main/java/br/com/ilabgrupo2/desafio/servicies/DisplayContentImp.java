@@ -38,9 +38,9 @@ public class DisplayContentImp implements IDisplayContent {
     	String name = p.getNome();
     	String desc = p.getDescricao();
     	Integer qtd  = p.getQuantidade();
-    	Double price = p.getPrice();
+    	Double preco = p.getPreco();
     	
-    	entries = "<p>" + name + " | " + desc + " | " + qtd + " | " + price + "<p>";
+    	entries = "<p>" + name + " | " + desc + " | " + qtd + " | " + preco + "<p>";
     	result.add(entries);
     }
     
