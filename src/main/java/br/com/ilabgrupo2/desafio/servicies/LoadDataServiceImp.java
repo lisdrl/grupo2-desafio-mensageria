@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.ilabgrupo2.desafio.model.Produto;
-import br.com.ilabgrupo2.desafio.repository.LoadDataDAO;
+import br.com.ilabgrupo2.desafio.repository.LoadDataRepository;
 
 @Service
 public class LoadDataServiceImp implements ILoadDataService {
 
 	@Autowired
-	private LoadDataDAO loadData;
+	private LoadDataRepository loadData;
 
 	@Override
 	public List<Produto> findAllProducts() {
