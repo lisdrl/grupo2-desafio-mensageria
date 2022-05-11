@@ -16,14 +16,19 @@ public class ClientServiceImp implements IClientService {
 	
 	@Override
 	public ResponseClientDTO createCliente(CreateClientDTO newClient) {
-		Cliente cliente = new Cliente();
-		cliente.setNome(newClient.getNome());
-		cliente.setTelefone(newClient.getTelefone());
-		
-		cliente = clientRepository.save(cliente);
-		
-		ResponseClientDTO clientResponse = new ResponseClientDTO(cliente);
-		return clientResponse;
+		try {			
+			Cliente cliente = new Cliente();
+			cliente.setNome(newClient.getNome());
+			cliente.setTelefone(newClient.getTelefone());
+			
+			cliente = clientRepository.save(cliente);
+			
+			ResponseClientDTO clientResponse = new ResponseClientDTO(cliente);
+			return clientResponse;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
