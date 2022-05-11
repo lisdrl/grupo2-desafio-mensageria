@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head> 
+    <title>Grupo 2 - Desafio Mensageria</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Cliente cadastrado com sucesso:</h1>
+    <p th:text="'Id: ' + ${cliente.id}" />
+    <p th:text="'Nome: ' + ${cliente.nome}" />
+    <p th:text="'Telefone: ' + ${cliente.telefone}" />
+    <a href="/cliente">Submit another message</a>
+</body>
+</html>
