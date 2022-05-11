@@ -3,12 +3,14 @@ package br.com.ilabgrupo2.desafio.servicies;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import br.com.ilabgrupo2.desafio.dto.CreateClientDTO;
 import br.com.ilabgrupo2.desafio.dto.ResponseClientDTO;
 import br.com.ilabgrupo2.desafio.model.Cliente;
 import br.com.ilabgrupo2.desafio.repository.ClientRepository;
 
+@Component
 public class ClientServiceImp implements IClientService {
 
 	@Autowired
@@ -16,7 +18,7 @@ public class ClientServiceImp implements IClientService {
 	
 	@Override
 	public ResponseClientDTO createCliente(CreateClientDTO newClient) {
-		try {			
+		try {
 			Cliente cliente = new Cliente();
 			cliente.setNome(newClient.getNome());
 			cliente.setTelefone(newClient.getTelefone());
