@@ -1,23 +1,25 @@
 package br.com.ilabgrupo2.desafio.dto;
 
+import br.com.ilabgrupo2.desafio.model.Cliente;
+
 public class ResponseClientDTO {
 
-	private Integer id;
+	private Long id;
 	private String nome;
 	private String telefone;
 	
-	public ResponseClientDTO(Integer id, String nome, String telefone) {
+	public ResponseClientDTO(Cliente cliente) {
 		super();
-		this.id = id;
-		this.nome = nome;
-		this.telefone = telefone;
+		this.id = cliente.getId();
+		this.nome = cliente.getNome();
+		this.telefone = cliente.getTelefone();
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
