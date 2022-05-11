@@ -17,7 +17,7 @@ import br.com.ilabgrupo2.desafio.servicies.IDisplayContent;
 import br.com.ilabgrupo2.desafio.utils.S3Util;
 
 @Controller
-public class HelloController {
+public class UploadController {
 	
 	@Autowired
 	private IDisplayContent displayContent;

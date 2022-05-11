@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "clients")
-public class Clientes {
+public class Cliente {
 
   @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,11 +28,11 @@ public class Clientes {
 
   @OneToMany(mappedBy = "idCliente")
 	@JsonIgnoreProperties("idCliente")
-	private List<Pedidos> listaPedidos;
+	private List<Pedido> listaPedidos;
 
-  public Clientes() {}
+  public Cliente() {}
   
-  public Clientes(Long id, String nome, String telefone) {
+  public Cliente(Long id, String nome, String telefone) {
     this.id = id;
     this.nome = nome;
     this.telefone = telefone;
@@ -57,11 +57,11 @@ public class Clientes {
     this.telefone = telefone;
   }
 
-  public List<Pedidos> getListaPedidos() {
+  public List<Pedido> getListaPedidos() {
     return listaPedidos;
   }
 
-  public void setListaPedidos(List<Pedidos> listaPedidos) {
+  public void setListaPedidos(List<Pedido> listaPedidos) {
     this.listaPedidos = listaPedidos;
   }
 

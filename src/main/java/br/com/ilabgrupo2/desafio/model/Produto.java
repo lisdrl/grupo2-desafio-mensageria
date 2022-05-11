@@ -37,7 +37,7 @@ public class Produto {
 	@ManyToOne
 	@JoinColumn(name = "order_id")
 	@JsonIgnoreProperties("listaProdutos")
-	private Pedidos idPedido;
+	private Pedido idPedido;
 	
 	public Long getId() {
 		return id;
@@ -87,11 +87,11 @@ public class Produto {
 		this.preco = preco;
 	}
 
-	public Pedidos getIdPedido() {
+	public Pedido getIdPedido() {
 		return idPedido;
 	}
 
-	public void setIdPedido(Pedidos idPedido) {
+	public void setIdPedido(Pedido idPedido) {
 		this.idPedido = idPedido;
 	}
 
