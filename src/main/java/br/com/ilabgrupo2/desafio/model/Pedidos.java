@@ -66,6 +66,14 @@ public class Pedidos {
         this.idCliente = idCliente;
     }
 
+    public List<Produto> getListaProdutos() {
+        return listaProdutos;
+    }
+
+    public void setListaProdutos(List<Produto> listaProdutos) {
+        this.listaProdutos = listaProdutos;
+    }
+
     @Override
     public String toString() {
         return "Pedidos [id=" + id + ", idCliente=" + idCliente + ", listaProdutos=" + listaProdutos + ", valorTotal="
