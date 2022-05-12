@@ -9,4 +9,6 @@ public interface IClientService {
 	ResponseClientDTO createCliente(CreateClientDTO newClient);
 	ResponseClientDTO getClientById(Long id);
 	List<ResponseClientDTO> getAllClient();
+	ResponseClientDTO updateClient(CreateClientDTO update, Long id);
+	void deleteClient(Long id);
 }

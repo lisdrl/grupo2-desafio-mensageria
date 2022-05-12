@@ -35,13 +35,44 @@ public class ClientServiceImp implements IClientService {
 
 	@Override
 	public ResponseClientDTO getClientById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return new ResponseClientDTO(clientRepository.findById(id).get());			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
 	public List<ResponseClientDTO> getAllClient() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public ResponseClientDTO updateClient(CreateClientDTO update, Long id) {
+		try {
+			ResponseClientDTO cliente = getClientById(id);
+			updateClientFields(update, cliente);
+			return new ResponseClientDTO(clientRepository.save(new Cliente(cliente.getId(), cliente.getNome(), cliente.getTelefone())));
+		} catch (Exception ex) {
+			return null;
+		}
+	}
+
+	@Override
+	public void deleteClient(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private void updateClientFields(CreateClientDTO update, ResponseClientDTO cliente) {
+		if(update.getNome() != null && !update.getNome().equals("")) {
+			cliente.setNome(update.getNome());
+		}
+		
+		if(update.getTelefone() != null && !update.getTelefone().equals("")) {
+			cliente.setTelefone(update.getTelefone());
+		}
 	}
 }
