@@ -20,4 +20,11 @@ public class CreateClientDTO {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+
+	@Override
+	public String toString() {
+		return "CreateClientDTO [nome=" + nome + ", telefone=" + telefone + "]";
+	}
+	
+	
 }
