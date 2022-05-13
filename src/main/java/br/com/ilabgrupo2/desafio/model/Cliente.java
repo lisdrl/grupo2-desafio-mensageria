@@ -23,7 +23,7 @@ public class Cliente {
   @Column(name = "client_name")
   private String nome;
 
-  @Column(name = "client_phone")
+  @Column(name = "client_phone", unique = true)
   private String telefone;
 
   @OneToMany(mappedBy = "idCliente")
