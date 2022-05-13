@@ -6,8 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.ilabgrupo2.desafio.dto.CreateClientDTO;
 import br.com.ilabgrupo2.desafio.dto.ResponseClientDTO;
@@ -20,17 +20,23 @@ public class ClientController {
 	@Autowired
 	private IClientService clientService;
 	
-	 @GetMapping
-   public String clientForm(Model model) {
-		 model.addAttribute("cliente", new CreateClientDTO());
-     return "client/client_register";
-   }
-	 
-	 @GetMapping("/update")
-	 public String updateClient(Model model) {
-		 model.addAttribute("cliente", new CreateClientDTO());
-		 return "client/client_update";
-	 }
+	@GetMapping("/delete")
+  public String delteClient(Model model) {
+      model.addAttribute("cliente", clientService.getAllClient());
+      return "client/client_delete";
+  }
+	
+	@GetMapping
+  public String clientForm(Model model) {
+		model.addAttribute("cliente", new CreateClientDTO());
+    return "client/client_register";
+  }
+	
+	@GetMapping("/update")
+	public String updateClient(Model model) {
+	 model.addAttribute("cliente", new CreateClientDTO());
+	 return "client/client_update";
+	}
 	
 	@PostMapping
 	public String createClient(@ModelAttribute CreateClientDTO cliente, Model model) {
@@ -48,7 +54,6 @@ public class ClientController {
 	
 	@PostMapping("/update")
 	public String updateClient(@ModelAttribute CreateClientDTO cliente, Model model) {
-		System.out.println(cliente);
 		ResponseClientDTO updatedClient = clientService.updateClient(cliente);
 		
 		if (updatedClient == null) {
@@ -58,5 +63,13 @@ public class ClientController {
 		
 		model.addAttribute("cliente", updatedClient);
 		return "client/client_result";
+	}
+	
+	@PostMapping("/delete")
+	public String deleteClient(@RequestParam("tel") String telefone) {
+		System.out.println(telefone);
+		clientService.deleteClient(telefone);
+		
+		return "client/client_delete";
 	}
 }
