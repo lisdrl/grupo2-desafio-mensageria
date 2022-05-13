@@ -1,5 +1,6 @@
 package br.com.ilabgrupo2.desafio.servicies;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +46,12 @@ public class ClientServiceImp implements IClientService {
 
 	@Override
 	public List<ResponseClientDTO> getAllClient() {
-		// TODO Auto-generated method stub
-		return null;
+		List<ResponseClientDTO> allClients = new ArrayList<>();
+		for (Cliente client : clientRepository.findAll()) {
+			allClients.add(new ResponseClientDTO(client));
+		}
+		
+		return allClients;
 	}
 
 	@Override
@@ -61,9 +66,22 @@ public class ClientServiceImp implements IClientService {
 	}
 
 	@Override
-	public void deleteClient(Long id) {
-		// TODO Auto-generated method stub
-		
+	public String deleteClient(String telefone) {
+		try {
+			ResponseClientDTO cliente = clientRepository.findByTelefone(telefone);
+			
+			if (cliente == null) {
+				System.out.println("Cliente não encontrado!!");
+				return "error";
+			}
+			
+			clientRepository.delete(new Cliente(cliente.getId(), cliente.getNome(), cliente.getTelefone()));
+			
+			return "redirect:/index";
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return "error";
+		}
 	}
 	
 	private void updateClientFields(CreateClientDTO update, ResponseClientDTO cliente) {

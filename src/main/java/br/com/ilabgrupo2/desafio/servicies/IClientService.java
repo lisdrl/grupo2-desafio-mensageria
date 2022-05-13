@@ -10,5 +10,5 @@ public interface IClientService {
 	ResponseClientDTO getClientById(Long id);
 	List<ResponseClientDTO> getAllClient();
 	ResponseClientDTO updateClient(CreateClientDTO update);
-	void deleteClient(Long id);
+	String deleteClient(String telefone);
 }
