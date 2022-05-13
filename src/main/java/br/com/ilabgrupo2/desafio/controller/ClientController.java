@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.ilabgrupo2.desafio.dto.CreateClientDTO;
@@ -22,11 +23,17 @@ public class ClientController {
 	 @GetMapping
    public String clientForm(Model model) {
 		 model.addAttribute("cliente", new CreateClientDTO());
-     return "client/cliente";
+     return "client/client_register";
    }
+	 
+	 @GetMapping("/update")
+	 public String updateClient(Model model) {
+		 model.addAttribute("cliente", new CreateClientDTO());
+		 return "client/client_update";
+	 }
 	
 	@PostMapping
-	public String createClient (@ModelAttribute CreateClientDTO cliente, Model model) {
+	public String createClient(@ModelAttribute CreateClientDTO cliente, Model model) {
 
 		ResponseClientDTO regClient = clientService.createCliente(cliente);
 		
@@ -36,6 +43,20 @@ public class ClientController {
 		}
 		
 		model.addAttribute("cliente", regClient);
+		return "client/client_result";
+	}
+	
+	@PostMapping("/update")
+	public String updateClient(@ModelAttribute CreateClientDTO cliente, Model model) {
+		System.out.println(cliente);
+		ResponseClientDTO updatedClient = clientService.updateClient(cliente);
+		
+		if (updatedClient == null) {
+			model.addAttribute("error", "Erro ao atualizar o cliente!");
+			return "client/client_error";
+		}
+		
+		model.addAttribute("cliente", updatedClient);
 		return "client/client_result";
 	}
 }
