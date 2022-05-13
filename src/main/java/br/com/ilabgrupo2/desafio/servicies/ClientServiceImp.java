@@ -36,7 +36,7 @@ public class ClientServiceImp implements IClientService {
 	@Override
 	public ResponseClientDTO getClientById(Long id) {
 		try {
-			return new ResponseClientDTO(clientRepository.findById(id).get());			
+			return new ResponseClientDTO(clientRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Id inválido: " + id)));			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return null;
@@ -50,9 +50,9 @@ public class ClientServiceImp implements IClientService {
 	}
 
 	@Override
-	public ResponseClientDTO updateClient(CreateClientDTO update, Long id) {
+	public ResponseClientDTO updateClient(CreateClientDTO update) {
 		try {
-			ResponseClientDTO cliente = getClientById(id);
+			ResponseClientDTO cliente = clientRepository.findByTelefone(update.getTelefone());
 			updateClientFields(update, cliente);
 			return new ResponseClientDTO(clientRepository.save(new Cliente(cliente.getId(), cliente.getNome(), cliente.getTelefone())));
 		} catch (Exception ex) {
