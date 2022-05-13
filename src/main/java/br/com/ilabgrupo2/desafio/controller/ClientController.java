@@ -3,6 +3,7 @@ package br.com.ilabgrupo2.desafio.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.ilabgrupo2.desafio.dto.CreateClientDTO;
 import br.com.ilabgrupo2.desafio.dto.ResponseClientDTO;
+import br.com.ilabgrupo2.desafio.model.Cliente;
 import br.com.ilabgrupo2.desafio.servicies.IClientService;
 
 @Controller
@@ -20,14 +22,20 @@ public class ClientController {
 	@Autowired
 	private IClientService clientService;
 	
+	@GetMapping
+  public String listClients(Model model) {
+      model.addAttribute("clientes", clientService.getAllClient());
+      return "client/index";
+  }
+	
 	@GetMapping("/delete")
   public String delteClient(Model model) {
-      model.addAttribute("cliente", clientService.getAllClient());
+      model.addAttribute("cliente", new Cliente());
       return "client/client_delete";
   }
 	
-	@GetMapping
-  public String clientForm(Model model) {
+	@GetMapping("/register")
+  public String createClient(Model model) {
 		model.addAttribute("cliente", new CreateClientDTO());
     return "client/client_register";
   }
@@ -38,7 +46,7 @@ public class ClientController {
 	 return "client/client_update";
 	}
 	
-	@PostMapping
+	@PostMapping("/register")
 	public String createClient(@ModelAttribute CreateClientDTO cliente, Model model) {
 
 		ResponseClientDTO regClient = clientService.createCliente(cliente);
@@ -48,8 +56,9 @@ public class ClientController {
 			return "client/client_error";
 		}
 		
-		model.addAttribute("cliente", regClient);
-		return "client/client_result";
+		// buscar todos os clientes e passar nesse parametro t-t no lugar de (regClient);
+		model.addAttribute("clientes", clientService.getAllClient());
+		return "client/index";
 	}
 	
 	@PostMapping("/update")
