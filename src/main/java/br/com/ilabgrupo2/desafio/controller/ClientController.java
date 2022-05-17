@@ -3,7 +3,6 @@ package br.com.ilabgrupo2.desafio.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import br.com.ilabgrupo2.desafio.dto.CreateClientDTO;
 import br.com.ilabgrupo2.desafio.dto.ResponseClientDTO;
 import br.com.ilabgrupo2.desafio.model.Cliente;
-import br.com.ilabgrupo2.desafio.servicies.IClientService;
+import br.com.ilabgrupo2.desafio.services.IClientService;
 
 @Controller
 @RequestMapping("clientes")

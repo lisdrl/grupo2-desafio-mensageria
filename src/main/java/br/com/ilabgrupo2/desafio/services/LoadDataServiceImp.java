@@ -1,4 +1,4 @@
-package br.com.ilabgrupo2.desafio.servicies;
+package br.com.ilabgrupo2.desafio.services;
 
 import java.util.List;
 

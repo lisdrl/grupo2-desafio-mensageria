@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.ilabgrupo2.desafio.kafka_producer.KafkaService;
-import br.com.ilabgrupo2.desafio.servicies.IDisplayContent;
+import br.com.ilabgrupo2.desafio.services.IDisplayContent;
 import br.com.ilabgrupo2.desafio.utils.S3Util;
 
 @Controller

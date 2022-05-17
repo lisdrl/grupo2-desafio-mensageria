@@ -11,12 +11,16 @@ public class ResponseOrderDTO {
     private Long id;
     private Double valorTotal;
     private Cliente idCliente;
+    private String nomeCliente;
     private List<Produto> listaProdutos;
     
+    public ResponseOrderDTO (){}
+
     public ResponseOrderDTO(Pedido pedido) {
       this.id = pedido.getId();
-      this.valorTotal = pedido.getValorTotal();
       this.idCliente = pedido.getIdCliente();
+      this.nomeCliente = pedido.getIdCliente().getNome();
+      this.valorTotal = pedido.getValorTotal();
       this.listaProdutos = pedido.getListaProdutos();
     }
 
@@ -44,6 +48,14 @@ public class ResponseOrderDTO {
       this.idCliente = idCliente;
     }
     
+    public String getNomeCliente() {
+      return nomeCliente;
+    }
+
+    public void setNomeCliente(String nomeCliente) {
+      this.nomeCliente = nomeCliente;
+    }
+
     public List<Produto> getListaProdutos() {
       return listaProdutos;
     }
@@ -51,4 +63,12 @@ public class ResponseOrderDTO {
     public void setListaProdutos(List<Produto> listaProdutos) {
       this.listaProdutos = listaProdutos;
     }
+
+    @Override
+    public String toString() {
+      return "ResponseOrderDTO [id=" + id + ", idCliente=" + idCliente + ", listaProdutos=" + listaProdutos
+          + ", nomeCliente=" + nomeCliente + ", valorTotal=" + valorTotal + "]";
+    }
+
+    
 }

@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "pedidos")
+@Table(name = "orders")
 public class Pedido {
     
   @Id
@@ -36,10 +36,11 @@ public class Pedido {
 
   public Pedido() {}
 
-  public Pedido(Long id, Double valorTotal, Cliente idCliente) {
+  public Pedido(Long id, Double valorTotal, Cliente idCliente, List<Produto> listaProdutos) {
     this.id = id;
     this.valorTotal = valorTotal;
     this.idCliente = idCliente;
+    this.listaProdutos = listaProdutos;
   }
 
   public Long getId() {
@@ -74,10 +75,13 @@ public class Pedido {
 		this.listaProdutos = listaProdutos;
 	}
 
-	@Override
+
+  @Override
   public String toString() {
-    return "Pedidos [id=" + id + ", idCliente=" + idCliente + ", listaProdutos=" + listaProdutos + ", valorTotal="
-            + valorTotal + "]";
-  } 
+    return "Pedido [id=" + id + ", listaProdutos=" + listaProdutos + ", valorTotal="
+        + valorTotal + "]";
+  }
+
+	
 }
 
